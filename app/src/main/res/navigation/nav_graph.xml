@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/rootFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_rootFragment2"
+            app:destination="@id/rootFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signInFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.signin.SignInFragment"
+        android:label="SignInFragment" >
+        <action
+            android:id="@+id/action_signInFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_signInFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.signup.SignUpFragment"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_sign_up" >
+        <action
+            android:id="@+id/action_signUpFragment_to_splashFragment"
+            app:destination="@id/splashFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/rootFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.root.RootFragment"
+        android:label="fragment_root"
+        tools:layout="@layout/fragment_root" >
+        <action
+            android:id="@+id/action_rootFragment_to_profileSettingsFragment"
+            app:destination="@id/profileSettingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ordersFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.orders.OrdersFragment"
+        android:label="fragment_orders"
+        tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/productsFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.products.ProductsFragment"
+        android:label="fragment_products"
+        tools:layout="@layout/fragment_products" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.profile.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/profileSettingsFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.profile_settings.ProfileSettingsFragment"
+        android:label="fragment_profile_settings"
+        tools:layout="@layout/fragment_profile_settings" />
+    <fragment
+        android:id="@+id/servicesFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.services.ServicesFragment"
+        android:label="fragment_services"
+        tools:layout="@layout/fragment_services" />
+    <fragment
+        android:id="@+id/informationFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.information.InformationFragment"
+        android:label="fragment_information"
+        tools:layout="@layout/fragment_information" />
+    <fragment
+        android:id="@+id/appointmentsFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.appointments.AppointmentsFragment"
+        android:label="fragment_appointments"
+        tools:layout="@layout/fragment_appointments" />
+</navigation>
