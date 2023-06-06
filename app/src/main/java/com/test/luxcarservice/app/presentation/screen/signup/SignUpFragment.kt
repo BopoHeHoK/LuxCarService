@@ -5,14 +5,28 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
+import com.test.luxcarservice.app.app.App
 import com.test.luxcarservice.databinding.FragmentSignUpBinding
+import javax.inject.Inject
 
 class SignUpFragment : Fragment() {
 
+    @Inject
+    lateinit var signUpViewModelFactory: SignUpViewModelFactory
+
     private lateinit var binding: FragmentSignUpBinding
+    private lateinit var signUpViewModel: SignUpViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        (activity?.applicationContext as App).appComponent.injectSignUpFragment(
+            signUpFragment = this
+        )
+        signUpViewModel = ViewModelProvider(
+            owner = this,
+            factory = signUpViewModelFactory
+        )[SignUpViewModel::class.java]
     }
 
     override fun onCreateView(
