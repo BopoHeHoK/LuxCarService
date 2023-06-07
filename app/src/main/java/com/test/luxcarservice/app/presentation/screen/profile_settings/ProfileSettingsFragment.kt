@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.test.luxcarservice.app.app.App
 import com.test.luxcarservice.databinding.FragmentProfileSettingsBinding
 import javax.inject.Inject
@@ -39,5 +40,34 @@ class ProfileSettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        openChangePassword()
+        closeChangePassword()
+        onArrowBackClick(view)
+    }
+
+    private fun openChangePassword() {
+        binding.apply {
+            changePassword.setOnClickListener {
+                changePassword.visibility = View.GONE
+                clChangePassword.visibility = View.VISIBLE
+            }
+        }
+    }
+
+    private fun closeChangePassword() {
+        binding.apply {
+            close.setOnClickListener {
+                changePassword.visibility = View.VISIBLE
+                clChangePassword.visibility = View.GONE
+            }
+        }
+    }
+
+    private fun onArrowBackClick(view: View) {
+        binding.apply {
+            arrowBack.setOnClickListener {
+                Navigation.findNavController(view).popBackStack()
+            }
+        }
     }
 }

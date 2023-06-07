@@ -1,8 +1,106 @@
 <resources>
+    <!-- Основное -->
+    <string name="version_number">v1.0.0</string>
     <string name="app_name">LuxCarService</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="save">Сохранить</string>
+    <!-- Основное -->
+
+    <!-- Вход -->
+    <string name="email">Email</string>
+    <string name="et_email">Введите email</string>
+    <string name="password">Пароль</string>
+    <string name="et_password">Введите пароль</string>
+    <string name="no_account">Нет аккаунта?</string>
+    <string name="to_registration">Зарегистрируйтесь!</string>
+    <string name="login">Войти</string>
+    <string name="first_name">Имя</string>
+    <string name="et_first_name">Введите имя</string>
+    <string name="last_name">Фамилия</string>
+    <string name="et_last_name">Введите фамилию</string>
+    <string name="et_repeat_password">Повторите пароль</string>
+    <string name="have_an_account">Есть аккаунт?</string>
+    <string name="to_login">Войдите!</string>
+    <string name="register">Зарегистрироваться</string>
+    <string name="phone_number">Номер телефона</string>
+    <string name="et_phone_number">Введите номер телефона</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="change">Изменить</string>
+    <string name="last_password">Старый пароль</string>
+    <string name="et_last_password">Введите старый пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="et_new_password">Введите новый пароль</string>
+    <string name="et_repeat_new_password">Повторите новый пароль</string>
+    <!-- Вход -->
+
+    <!-- Услуги -->
     <string name="services">Услуги</string>
+    <string name="service">Услуга</string>
+    <string name="service_description">Описание услуги</string>
+    <!-- Услуги -->
+
+    <!-- Автотовары -->
     <string name="products">Автотовары</string>
+    <string name="product">Автотовар</string>
+    <string name="product_description">Описание автотовара</string>
+    <!-- Автотовары -->
+
+    <!-- Записи -->
+    <string name="your_appointments">Ваши записи</string>
+    <string name="subscribe">Записаться</string>
+    <!-- Записи -->
+
+    <!-- Заказы -->
+    <string name="orders">Заказы</string>
+    <string name="your_orders">Ваши заказы</string>
+    <string name="order">Заказать</string>
+    <!-- Заказы -->
+
+    <!-- Профиль -->
     <string name="profile">Профиль</string>
+    <string name="test_name">Иванов Иван</string>
+    <string name="edit_profile">Редактировать профиль</string>
+    <string name="change_biometrics">Изменить биометрию</string>
+    <string name="get_premium">Получить премиум</string>
+    <string name="logout">Выйти</string>
+    <string name="premium">Premium</string>
+    <!-- Профиль -->
+
+    <!-- Информация -->
+    <string name="information">Информация</string>
+    <!-- Информация -->
+
+    <!-- Уведомления -->
+    <string name="notifications">Уведомления</string>
+    <string name="notification">Уведомление</string>
+    <!-- Уведомления -->
+
+    <!-- Цифровые значения -->
+    <string name="_0">0</string>
+    <string name="_1500">1500&#160;руб.</string>
+    <string name="_7_00">7:00</string>
+    <string name="_8_00">8:00</string>
+    <string name="_10_00">10:00</string>
+    <string name="_12_00">12:00</string>
+    <string name="_13_00">13:00</string>
+    <string name="_16_00">16:00</string>
+    <string name="_19_00">19:00</string>
+    <string name="_2023_05_05">2023–05–05</string>
+    <string name="_2023_06_05">2023–06–05</string>
+    <!-- Цифровые значения -->
+
+    <!-- Ошибки-->
+    <string name="error">Ошибка</string>
+    <string name="error_login">Неверный логин или пароль</string>
+    <string name="error_register">Пользователь уже существует</string>
+    <string name="wrong_email_or_password_error">Неверный email или пароль</string>
+    <string name="email_exist_error">Пользователь с таким email уже существует</string>
+    <string name="empty_field_error">Поле не должно быть пустым</string>
+    <string name="email_format_error">Email должен быть в формате mail@mail.mail</string>
+    <string name="password_length_error">Пароль должен содержать не меньше 6 символов</string>
+    <string name="repeat_password_error">Пароли не совпадают</string>
+    <string name="price">Цена</string>
+    <string name="Count">Количество</string>
+    <string name="time">Время</string>
+    <string name="date">Дата</string>
+    <!-- Ошибки-->
 </resources>

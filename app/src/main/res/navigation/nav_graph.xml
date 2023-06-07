@@ -44,6 +44,21 @@
         <action
             android:id="@+id/action_rootFragment_to_profileSettingsFragment"
             app:destination="@id/profileSettingsFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_appointmentsFragment"
+            app:destination="@id/appointmentsFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_informationFragment"
+            app:destination="@id/informationFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_ordersFragment"
+            app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_notificationsFragment"
+            app:destination="@id/notificationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
@@ -80,4 +95,9 @@
         android:name="com.test.luxcarservice.app.presentation.screen.appointments.AppointmentsFragment"
         android:label="fragment_appointments"
         tools:layout="@layout/fragment_appointments" />
+    <fragment
+        android:id="@+id/notificationsFragment"
+        android:name="com.test.luxcarservice.app.presentation.screen.notifications.NotificationsFragment"
+        android:label="fragment_notifications"
+        tools:layout="@layout/fragment_notifications" />
 </navigation>

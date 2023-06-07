@@ -5,7 +5,9 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.GravityCompat
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.google.android.material.tabs.TabLayoutMediator
 import com.test.luxcarservice.R
 import com.test.luxcarservice.app.app.App
@@ -45,7 +47,47 @@ class RootFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        openSideMenu()
+        onMenuItemClick(view)
         createViewPager()
+    }
+
+    private fun openSideMenu() {
+        binding.apply {
+            btnBurgerMenu.setOnClickListener {
+                drawer.openDrawer(GravityCompat.START)
+            }
+        }
+    }
+
+    private fun onMenuItemClick(view: View) {
+        binding.apply {
+            navigationView.setNavigationItemSelectedListener {
+                when (it.itemId) {
+                    R.id.your_appointments -> {
+                        Navigation.findNavController(view)
+                            .navigate(R.id.action_rootFragment_to_appointmentsFragment)
+                    }
+                    R.id.your_orders -> {
+                        Navigation.findNavController(view)
+                            .navigate(R.id.action_rootFragment_to_ordersFragment)
+                    }
+                    R.id.notifications -> {
+                        Navigation.findNavController(view)
+                            .navigate(R.id.action_rootFragment_to_notificationsFragment)
+                    }
+                    R.id.information -> {
+                        Navigation.findNavController(view)
+                            .navigate(R.id.action_rootFragment_to_informationFragment)
+                    }
+                    else -> {
+                        Navigation.findNavController(view)
+                            .navigate(R.id.action_rootFragment_to_signInFragment)
+                    }
+                }
+                true
+            }
+        }
     }
 
     private fun createViewPager() {
@@ -62,17 +104,17 @@ class RootFragment : Fragment() {
                 when (pos) {
                     2 -> {
                         tab.text = getString(R.string.profile)
-//                        tab.setIcon(R.drawable.selector_calc)
+                        tab.setIcon(R.drawable.selector_profile)
                     }
 
                     1 -> {
                         tab.text = getString(R.string.products)
-//                        tab.setIcon(R.drawable.selector_schedule)
+                        tab.setIcon(R.drawable.selector_products)
                     }
 
                     else -> {
                         tab.text = getString(R.string.services)
-//                        tab.setIcon(R.drawable.selector_home)
+                        tab.setIcon(R.drawable.selector_services)
                     }
                 }
             }.attach()

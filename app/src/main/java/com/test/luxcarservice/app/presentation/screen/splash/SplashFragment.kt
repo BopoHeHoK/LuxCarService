@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -44,10 +45,18 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        addAnim()
         lifecycleScope.launch {
-            delay(3000)
-            Navigation.findNavController(view)
-                .navigate(R.id.action_splashFragment_to_rootFragment)
+            splashViewModel.apply {
+                delay(3000)
+                Navigation.findNavController(view)
+                    .navigate(R.id.action_splashFragment_to_rootFragment)
+            }
         }
+    }
+
+    private fun addAnim() {
+        val rotate = AnimationUtils.loadAnimation(context, R.anim.loading_rotate)
+        binding.imgLoading.animation = rotate
     }
 }

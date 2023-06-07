@@ -3,6 +3,7 @@ package com.test.luxcarservice.app.di
 import android.content.Context
 import com.test.luxcarservice.app.presentation.screen.appointments.AppointmentsViewModelFactory
 import com.test.luxcarservice.app.presentation.screen.information.InformationViewModelFactory
+import com.test.luxcarservice.app.presentation.screen.notifications.NotificationsViewModelFactory
 import com.test.luxcarservice.app.presentation.screen.orders.OrdersViewModelFactory
 import com.test.luxcarservice.app.presentation.screen.products.ProductsViewModelFactory
 import com.test.luxcarservice.app.presentation.screen.profile.ProfileViewModelFactory
@@ -37,6 +38,15 @@ class AppModule(val context: Context) {
 
     ): InformationViewModelFactory {
         return InformationViewModelFactory(
+
+        )
+    }
+
+    @Provides
+    fun provideNotificationsViewModelFactory(
+
+    ): NotificationsViewModelFactory {
+        return NotificationsViewModelFactory(
 
         )
     }

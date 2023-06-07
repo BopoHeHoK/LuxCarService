@@ -2,6 +2,7 @@ package com.test.luxcarservice.app.di
 
 import com.test.luxcarservice.app.presentation.screen.appointments.AppointmentsFragment
 import com.test.luxcarservice.app.presentation.screen.information.InformationFragment
+import com.test.luxcarservice.app.presentation.screen.notifications.NotificationsFragment
 import com.test.luxcarservice.app.presentation.screen.orders.OrdersFragment
 import com.test.luxcarservice.app.presentation.screen.products.ProductsFragment
 import com.test.luxcarservice.app.presentation.screen.profile.ProfileFragment
@@ -19,6 +20,8 @@ interface AppComponent {
     fun injectAppointmentsFragment(appointmentsFragment: AppointmentsFragment)
 
     fun injectInformationFragment(informationFragment: InformationFragment)
+
+    fun injectNotificationsFragment(notificationsFragment: NotificationsFragment)
 
     fun injectOrdersFragment(ordersFragment: OrdersFragment)
 

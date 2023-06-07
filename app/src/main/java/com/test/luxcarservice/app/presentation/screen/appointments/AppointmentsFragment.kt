@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import com.test.luxcarservice.app.app.App
 import com.test.luxcarservice.databinding.FragmentAppointmentsBinding
 import javax.inject.Inject
@@ -39,5 +40,14 @@ class AppointmentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onArrowBackClick(view)
+    }
+
+    private fun onArrowBackClick(view: View) {
+        binding.apply {
+            arrowBack.setOnClickListener {
+                Navigation.findNavController(view).popBackStack()
+            }
+        }
     }
 }
