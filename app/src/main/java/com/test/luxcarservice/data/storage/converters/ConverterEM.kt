@@ -17,12 +17,18 @@ import com.test.luxcarservice.domain.model.User
 
 interface ConverterEM {
     fun toAppointment(appointmentEntity: AppointmentEntity): Appointment
+    fun toAppointmentList(appointmentEntityList: List<AppointmentEntity>): List<Appointment>
     fun toNotification(notificationEntity: NotificationEntity): Notification
+    fun toNotificationList(notificationEntityList: List<NotificationEntity>): List<Notification>
     fun toProduct(productEntity: ProductEntity): Product
+    fun toProductList(productEntityList: List<ProductEntity>): List<Product>
     fun toRole(roleEntity: RoleEntity): Role
     fun toService(serviceEntity: ServiceEntity): Service
+    fun toServiceList(serviceEntityList: List<ServiceEntity>): List<Service>
     fun toShopCart(shopCartEntity: ShopCartEntity): ShopCart
+    fun toShopCartList(shopCartEntityList: List<ShopCartEntity>): List<ShopCart>
     fun toUser(userEntity: UserEntity): User
+    fun toUserList(userEntityList: List<UserEntity>): List<User>
 }
 
 class ConverterEMImpl : ConverterEM {
@@ -36,12 +42,40 @@ class ConverterEMImpl : ConverterEM {
         )
     }
 
+    override fun toAppointmentList(appointmentEntityList: List<AppointmentEntity>): List<Appointment> {
+        val result = ArrayList<Appointment>()
+        appointmentEntityList.forEach {
+            val converted = Appointment(
+                id = it.id,
+                user_id = it.user_id,
+                service_id = it.service_id,
+                date = it.date,
+                time = it.time,
+            )
+            result.add(converted)
+        }
+        return result
+    }
+
     override fun toNotification(notificationEntity: NotificationEntity): Notification {
         return Notification(
             id = notificationEntity.id,
             user_id = notificationEntity.user_id,
             notification = notificationEntity.notification,
         )
+    }
+
+    override fun toNotificationList(notificationEntityList: List<NotificationEntity>): List<Notification> {
+        val result = ArrayList<Notification>()
+        notificationEntityList.forEach {
+            val converted = Notification(
+                id = it.id,
+                user_id = it.user_id,
+                notification = it.notification,
+            )
+            result.add(converted)
+        }
+        return result
     }
 
     override fun toProduct(productEntity: ProductEntity): Product {
@@ -51,6 +85,20 @@ class ConverterEMImpl : ConverterEM {
             description = productEntity.description,
             price = productEntity.price,
         )
+    }
+
+    override fun toProductList(productEntityList: List<ProductEntity>): List<Product> {
+        val result = ArrayList<Product>()
+        productEntityList.forEach {
+            val converted = Product(
+                id = it.id,
+                name = it.name,
+                description = it.description,
+                price = it.price,
+            )
+            result.add(converted)
+        }
+        return result
     }
 
     override fun toRole(roleEntity: RoleEntity): Role {
@@ -69,6 +117,20 @@ class ConverterEMImpl : ConverterEM {
         )
     }
 
+    override fun toServiceList(serviceEntityList: List<ServiceEntity>): List<Service> {
+        val result = ArrayList<Service>()
+        serviceEntityList.forEach {
+            val converted = Service(
+                id = it.id,
+                name = it.name,
+                description = it.description,
+                price = it.price,
+            )
+            result.add(converted)
+        }
+        return result
+    }
+
     override fun toShopCart(shopCartEntity: ShopCartEntity): ShopCart {
         return ShopCart(
             id = shopCartEntity.id,
@@ -78,14 +140,46 @@ class ConverterEMImpl : ConverterEM {
         )
     }
 
+    override fun toShopCartList(shopCartEntityList: List<ShopCartEntity>): List<ShopCart> {
+        val result = ArrayList<ShopCart>()
+        shopCartEntityList.forEach {
+            val converted = ShopCart(
+                id = it.id,
+                user_id = it.user_id,
+                product_id = it.product_id,
+                count = it.count,
+            )
+            result.add(converted)
+        }
+        return result
+    }
+
     override fun toUser(userEntity: UserEntity): User {
         return User(
             id = userEntity.id,
             email = userEntity.email,
+            password = userEntity.password,
             phone_number = userEntity.phone_number,
             first_name = userEntity.first_name,
             last_name = userEntity.last_name,
             role_id = userEntity.role_id,
         )
+    }
+
+    override fun toUserList(userEntityList: List<UserEntity>): List<User> {
+        val result = ArrayList<User>()
+        userEntityList.forEach {
+            val converted = User(
+                id = it.id,
+                email = it.email,
+                password = it.password,
+                phone_number = it.phone_number,
+                first_name = it.first_name,
+                last_name = it.last_name,
+                role_id = it.role_id,
+            )
+            result.add(converted)
+        }
+        return result
     }
 }

@@ -12,6 +12,7 @@ import androidx.navigation.Navigation
 import com.test.luxcarservice.R
 import com.test.luxcarservice.app.app.App
 import com.test.luxcarservice.databinding.FragmentSplashBinding
+import com.test.luxcarservice.domain.model.Role
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -47,12 +48,25 @@ class SplashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         addAnim()
         lifecycleScope.launch {
+            setRoles()
             splashViewModel.apply {
-                delay(3000)
-                Navigation.findNavController(view)
-                    .navigate(R.id.action_splashFragment_to_rootFragment)
+                if (getUserId() == 0L) {
+                    delay(1000)
+                    Navigation.findNavController(view)
+                        .navigate(R.id.action_splashFragment_to_signInFragment)
+                } else {
+                    delay(3000)
+                    Navigation.findNavController(view)
+                        .navigate(R.id.action_splashFragment_to_rootFragment)
+                }
             }
         }
+    }
+
+    private fun setRoles() {
+        val roles = listOf(Role(1, "USER"), Role(2, "STAFF"))
+        for (role in roles)
+            splashViewModel.upsertRole(role)
     }
 
     private fun addAnim() {

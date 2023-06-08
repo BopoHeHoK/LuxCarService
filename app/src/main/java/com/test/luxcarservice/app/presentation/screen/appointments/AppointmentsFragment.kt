@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.luxcarservice.app.app.App
+import com.test.luxcarservice.app.presentation.adapter.AppointmentAdapter
 import com.test.luxcarservice.databinding.FragmentAppointmentsBinding
 import javax.inject.Inject
 
@@ -18,6 +20,7 @@ class AppointmentsFragment : Fragment() {
 
     private lateinit var binding: FragmentAppointmentsBinding
     private lateinit var appointmentsViewModel: AppointmentsViewModel
+    private lateinit var appointmentAdapter: AppointmentAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,21 @@ class AppointmentsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeAppointments()
         onArrowBackClick(view)
+    }
+
+    private fun addAppointmentAdapter() {
+        appointmentAdapter = AppointmentAdapter()
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = appointmentAdapter
+        }
+    }
+
+    private fun observeAppointments() {
+        addAppointmentAdapter()
+        appointmentAdapter.setAppointmentList(appointmentsViewModel.getAppointments())
     }
 
     private fun onArrowBackClick(view: View) {

@@ -7,7 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.luxcarservice.app.app.App
+import com.test.luxcarservice.app.presentation.adapter.OrderAdapter
 import com.test.luxcarservice.databinding.FragmentOrdersBinding
 import javax.inject.Inject
 
@@ -18,6 +20,7 @@ class OrdersFragment : Fragment() {
 
     private lateinit var binding: FragmentOrdersBinding
     private lateinit var ordersViewModel: OrdersViewModel
+    private lateinit var orderAdapter: OrderAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +43,21 @@ class OrdersFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeOrders()
         onArrowBackClick(view)
+    }
+
+    private fun addOrderAdapter() {
+        orderAdapter = OrderAdapter()
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = orderAdapter
+        }
+    }
+
+    private fun observeOrders() {
+        addOrderAdapter()
+        orderAdapter.setOrderList(ordersViewModel.getOrders())
     }
 
     private fun onArrowBackClick(view: View) {

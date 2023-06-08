@@ -25,7 +25,7 @@ interface ConverterME {
     fun toUserEntity(user: User): UserEntity
 }
 
-class ConverterMEImpl: ConverterME {
+class ConverterMEImpl : ConverterME {
     override fun toAppointmentEntity(appointment: Appointment): AppointmentEntity {
         return AppointmentEntity(
             id = appointment.id,
@@ -82,6 +82,7 @@ class ConverterMEImpl: ConverterME {
         return UserEntity(
             id = user.id,
             email = user.email,
+            password = user.password,
             phone_number = user.phone_number,
             first_name = user.first_name,
             last_name = user.last_name,

@@ -13,7 +13,7 @@ import com.test.luxcarservice.data.storage.modelDb.ShopCartEntity
 import com.test.luxcarservice.data.storage.modelDb.UserEntity
 
 @Database(
-    version = 1,
+    version = 3,
     entities = [
         AppointmentEntity::class,
         NotificationEntity::class,
@@ -25,7 +25,7 @@ import com.test.luxcarservice.data.storage.modelDb.UserEntity
     ],
     exportSchema = true
 )
-abstract class LuxCarServiceDatabase: RoomDatabase() {
+abstract class LuxCarServiceDatabase : RoomDatabase() {
 
     abstract fun luxCarServiceDao(): LuxCarServiceDao
 

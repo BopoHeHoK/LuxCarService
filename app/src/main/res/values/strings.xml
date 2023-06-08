@@ -58,7 +58,7 @@
     <!-- Профиль -->
     <string name="profile">Профиль</string>
     <string name="test_name">Иванов Иван</string>
-    <string name="edit_profile">Редактировать профиль</string>
+    <string name="settings">Настройки</string>
     <string name="change_biometrics">Изменить биометрию</string>
     <string name="get_premium">Получить премиум</string>
     <string name="logout">Выйти</string>

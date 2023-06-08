@@ -5,7 +5,7 @@ import com.test.luxcarservice.app.di.AppComponent
 import com.test.luxcarservice.app.di.AppModule
 import com.test.luxcarservice.app.di.DaggerAppComponent
 
-class App: Application() {
+class App : Application() {
 
     lateinit var appComponent: AppComponent
 

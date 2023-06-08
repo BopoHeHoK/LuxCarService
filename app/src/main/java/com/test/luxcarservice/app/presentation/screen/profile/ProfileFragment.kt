@@ -78,6 +78,7 @@ class ProfileFragment : Fragment() {
 
     private fun logout(view: View) {
         binding.linear5.setOnClickListener {
+            profileViewModel.deleteUserId()
             Navigation.findNavController(view)
                 .navigate(R.id.action_rootFragment_to_signInFragment)
         }

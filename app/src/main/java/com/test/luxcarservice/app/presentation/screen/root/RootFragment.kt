@@ -68,19 +68,24 @@ class RootFragment : Fragment() {
                         Navigation.findNavController(view)
                             .navigate(R.id.action_rootFragment_to_appointmentsFragment)
                     }
+
                     R.id.your_orders -> {
                         Navigation.findNavController(view)
                             .navigate(R.id.action_rootFragment_to_ordersFragment)
                     }
+
                     R.id.notifications -> {
                         Navigation.findNavController(view)
                             .navigate(R.id.action_rootFragment_to_notificationsFragment)
                     }
+
                     R.id.information -> {
                         Navigation.findNavController(view)
                             .navigate(R.id.action_rootFragment_to_informationFragment)
                     }
+
                     else -> {
+                        rootViewModel.deleteUserId()
                         Navigation.findNavController(view)
                             .navigate(R.id.action_rootFragment_to_signInFragment)
                     }

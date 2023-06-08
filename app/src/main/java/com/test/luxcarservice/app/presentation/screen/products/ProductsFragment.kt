@@ -6,7 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.luxcarservice.app.app.App
+import com.test.luxcarservice.app.presentation.adapter.ProductAdapter
 import com.test.luxcarservice.databinding.FragmentProductsBinding
 import javax.inject.Inject
 
@@ -17,6 +19,7 @@ class ProductsFragment : Fragment() {
 
     private lateinit var binding: FragmentProductsBinding
     private lateinit var productsViewModel: ProductsViewModel
+    private lateinit var productAdapter: ProductAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,5 +42,19 @@ class ProductsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeProducts()
+    }
+
+    private fun addProductAdapter() {
+        productAdapter = ProductAdapter()
+        binding.recyclerView.apply {
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
+            adapter = productAdapter
+        }
+    }
+
+    private fun observeProducts() {
+        addProductAdapter()
+        productAdapter.setProductList(productsViewModel.getProducts())
     }
 }

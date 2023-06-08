@@ -1,6 +1,7 @@
 package com.test.luxcarservice.app.di
 
 import android.content.Context
+import com.test.luxcarservice.data.db.LuxCarServiceDatabase
 import com.test.luxcarservice.data.repository.SharedPreferences
 import com.test.luxcarservice.data.repository.UserRepositoryImpl
 import com.test.luxcarservice.data.storage.converters.ConverterEM
@@ -21,6 +22,11 @@ class DataModule {
     }
 
     @Provides
+    fun provideLuxCarServiceDatabase(context: Context): LuxCarServiceDatabase {
+        return LuxCarServiceDatabase.getInstance(context = context)
+    }
+
+    @Provides
     fun provideConverterEM(): ConverterEM {
         return ConverterEMImpl()
     }
@@ -32,10 +38,16 @@ class DataModule {
 
     @Provides
     fun provideUserRepository(
-
+        userStorage: UserStorage,
+        luxCarServiceDatabase: LuxCarServiceDatabase,
+        converterEM: ConverterEM,
+        converterME: ConverterME,
     ): UserRepository {
         return UserRepositoryImpl(
-
+            userStorage = userStorage,
+            luxCarServiceDatabase = luxCarServiceDatabase,
+            converterEM = converterEM,
+            converterME = converterME,
         )
     }
 }
