@@ -22,9 +22,12 @@ import com.test.luxcarservice.domain.use_case.GetProductsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetServicesFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetShopCartsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetUserFromDbByEmailUseCase
+import com.test.luxcarservice.domain.use_case.GetUserFromDbByIdUseCase
 import com.test.luxcarservice.domain.use_case.GetUserIdFromSharedPrefsUseCase
 import com.test.luxcarservice.domain.use_case.GetUsersFromDbUseCase
+import com.test.luxcarservice.domain.use_case.SaveProductToDbUseCase
 import com.test.luxcarservice.domain.use_case.SaveRoleToDbUseCase
+import com.test.luxcarservice.domain.use_case.SaveServiceToDbUseCase
 import com.test.luxcarservice.domain.use_case.SaveUserToDbUseCase
 import com.test.luxcarservice.domain.use_case.SetUserIdToSharedPrefsUseCase
 import dagger.Module
@@ -85,20 +88,27 @@ class AppModule(val context: Context) {
 
     @Provides
     fun provideProfileViewModelFactory(
+        getUserIdFromSharedPrefsUseCase: GetUserIdFromSharedPrefsUseCase,
         setUserIdToSharedPrefsUseCase: SetUserIdToSharedPrefsUseCase,
-
-        ): ProfileViewModelFactory {
+        getUserFromDbByIdUseCase: GetUserFromDbByIdUseCase,
+    ): ProfileViewModelFactory {
         return ProfileViewModelFactory(
+            getUserIdFromSharedPrefsUseCase = getUserIdFromSharedPrefsUseCase,
             setUserIdToSharedPrefsUseCase = setUserIdToSharedPrefsUseCase,
+            getUserFromDbByIdUseCase = getUserFromDbByIdUseCase,
         )
     }
 
     @Provides
     fun provideProfileSettingsViewModelFactory(
-
+        getUserIdFromSharedPrefsUseCase: GetUserIdFromSharedPrefsUseCase,
+        getUserFromDbByIdUseCase: GetUserFromDbByIdUseCase,
+        saveUserToDbUseCase: SaveUserToDbUseCase,
     ): ProfileSettingsViewModelFactory {
         return ProfileSettingsViewModelFactory(
-
+            getUserIdFromSharedPrefsUseCase = getUserIdFromSharedPrefsUseCase,
+            getUserFromDbByIdUseCase = getUserFromDbByIdUseCase,
+            saveUserToDbUseCase = saveUserToDbUseCase,
         )
     }
 
@@ -153,10 +163,14 @@ class AppModule(val context: Context) {
     @Provides
     fun provideSplashViewModelFactory(
         saveRoleToDbUseCase: SaveRoleToDbUseCase,
+        saveServiceToDbUseCase: SaveServiceToDbUseCase,
+        saveProductToDbUseCase: SaveProductToDbUseCase,
         getUserIdFromSharedPrefsUseCase: GetUserIdFromSharedPrefsUseCase,
     ): SplashViewModelFactory {
         return SplashViewModelFactory(
             saveRoleToDbUseCase = saveRoleToDbUseCase,
+            saveServiceToDbUseCase = saveServiceToDbUseCase,
+            saveProductToDbUseCase = saveProductToDbUseCase,
             getUserIdFromSharedPrefsUseCase = getUserIdFromSharedPrefsUseCase,
         )
     }

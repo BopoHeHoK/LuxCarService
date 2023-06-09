@@ -1,5 +1,6 @@
 package com.test.luxcarservice.app.presentation.screen.profile
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -41,11 +42,20 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeUser()
         toProfileSettings(view)
         toAppointments(view)
         toOrders(view)
         toNotifications(view)
         logout(view)
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun observeUser() {
+        val user = profileViewModel.getUser(profileViewModel.getUserId())
+        binding.apply {
+            username.text = "${user.last_name} ${user.first_name}"
+        }
     }
 
     private fun toProfileSettings(view: View) {

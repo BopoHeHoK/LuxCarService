@@ -102,5 +102,9 @@
     <string name="Count">Количество</string>
     <string name="time">Время</string>
     <string name="date">Дата</string>
+    <string name="mock_address">ул. Долгополова, 19, Нижний Новгород, 603002</string>
+    <string name="mock_phone">+7 (831) 999-99-99</string>
+    <string name="mock_email">luxcarservice@nn.ru</string>
+    <string name="mock_description">На рынке автомобильных услуг уже 25 лет, с 1996 года. У нас возможно обслуживание до восьми автомобилей одновременно, всегда в наличии технологические жидкости и расходные материалы. Опыт сотрудников автосервиса составляет более 10 лет успешной работы.</string>
     <!-- Ошибки-->
 </resources>
