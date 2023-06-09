@@ -43,6 +43,28 @@ class UserRepositoryImpl(
         return false
     }
 
+    override suspend fun deleteProductByIdFromDbUseCase(productId: Long) {
+        luxCarServiceDatabase.luxCarServiceDao().deleteShopCartByProductId(productId = productId)
+        luxCarServiceDatabase.luxCarServiceDao().deleteProductById(productId = productId)
+    }
+
+    override suspend fun deleteServiceByIdFromDbUseCase(serviceId: Long) {
+        luxCarServiceDatabase.luxCarServiceDao().deleteAppointmentByServiceId(serviceId = serviceId)
+        luxCarServiceDatabase.luxCarServiceDao().deleteServiceById(serviceId = serviceId)
+    }
+
+    override fun getLastAppointmentFromDb(): Appointment {
+        return converterEM.toAppointment(
+            luxCarServiceDatabase.luxCarServiceDao().getLastAppointmentEntity()
+        )
+    }
+
+    override fun getLastShopCartFromDb(): ShopCart {
+        return converterEM.toShopCart(
+            luxCarServiceDatabase.luxCarServiceDao().getLastShopCartEntity()
+        )
+    }
+
     override fun getLastUserFromDb(): User {
         return converterEM.toUser(luxCarServiceDatabase.luxCarServiceDao().getLastUserEntity())
     }
@@ -63,9 +85,19 @@ class UserRepositoryImpl(
         return converterEM.toUserList(luxCarServiceDatabase.luxCarServiceDao().getAllUserEntity())
     }
 
+    override fun getRolesFromDb(): List<Role> {
+        return converterEM.toRoleList(luxCarServiceDatabase.luxCarServiceDao().getAllRoleEntity())
+    }
+
     override fun getAppointmentsFromDb(): List<Appointment> {
         return converterEM.toAppointmentList(
             luxCarServiceDatabase.luxCarServiceDao().getAllAppointmentEntity()
+        )
+    }
+
+    override fun getAppointmentsByUserIdFromDb(userId: Long): List<Appointment> {
+        return converterEM.toAppointmentList(
+            luxCarServiceDatabase.luxCarServiceDao().getAppointmentByUserIdEntity(userId = userId)
         )
     }
 
@@ -78,6 +110,12 @@ class UserRepositoryImpl(
     override fun getShopCartsFromDb(): List<ShopCart> {
         return converterEM.toShopCartList(
             luxCarServiceDatabase.luxCarServiceDao().getAllShopCartEntity()
+        )
+    }
+
+    override fun getShopCartsByUserIdFromDb(userId: Long): List<ShopCart> {
+        return converterEM.toShopCartList(
+            luxCarServiceDatabase.luxCarServiceDao().getShopCartByUserIdEntity(userId = userId)
         )
     }
 

@@ -2,12 +2,16 @@ package com.test.luxcarservice.app.presentation.adapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.test.luxcarservice.databinding.ItemServiceBinding
 import com.test.luxcarservice.domain.model.Service
 
-class ServiceAdapter : RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() {
+class ServiceAdapter(
+    val listener: Listener,
+    val role: String
+) : RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() {
 
     class ServiceViewHolder(val binding: ItemServiceBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -24,8 +28,20 @@ class ServiceAdapter : RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() 
 
     override fun onBindViewHolder(holder: ServiceViewHolder, position: Int) {
         holder.binding.apply {
+            if (role == "STAFF") {
+                remove.apply {
+                    visibility = View.VISIBLE
+                    setOnClickListener {
+                        listener.onRemoveClick(serviceList[position])
+                    }
+                }
+            }
+
             tvTitle.text = serviceList[position].name
             tvDescription.text = serviceList[position].description
+            btnSubscribe.setOnClickListener {
+                listener.onServiceClick(serviceList[position])
+            }
         }
     }
 
@@ -37,5 +53,11 @@ class ServiceAdapter : RecyclerView.Adapter<ServiceAdapter.ServiceViewHolder>() 
     fun setServiceList(serviceList: List<Service>) {
         this.serviceList = serviceList as ArrayList<Service>
         notifyDataSetChanged()
+    }
+
+    interface Listener {
+
+        fun onRemoveClick(service: Service)
+        fun onServiceClick(service: Service)
     }
 }

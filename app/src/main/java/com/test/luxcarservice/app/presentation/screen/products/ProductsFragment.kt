@@ -5,14 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.test.luxcarservice.R
 import com.test.luxcarservice.app.app.App
 import com.test.luxcarservice.app.presentation.adapter.ProductAdapter
 import com.test.luxcarservice.databinding.FragmentProductsBinding
+import com.test.luxcarservice.domain.model.Product
+import com.test.luxcarservice.domain.model.ShopCart
 import javax.inject.Inject
 
-class ProductsFragment : Fragment() {
+class ProductsFragment : Fragment(), ProductAdapter.Listener {
 
     @Inject
     lateinit var productsViewModelFactory: ProductsViewModelFactory
@@ -20,6 +24,8 @@ class ProductsFragment : Fragment() {
     private lateinit var binding: FragmentProductsBinding
     private lateinit var productsViewModel: ProductsViewModel
     private lateinit var productAdapter: ProductAdapter
+
+    private var role = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +49,11 @@ class ProductsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeProducts()
+        onAddButtonClick(view)
     }
 
     private fun addProductAdapter() {
-        productAdapter = ProductAdapter()
+        productAdapter = ProductAdapter(this, role)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = productAdapter
@@ -54,7 +61,44 @@ class ProductsFragment : Fragment() {
     }
 
     private fun observeProducts() {
-        addProductAdapter()
-        productAdapter.setProductList(productsViewModel.getProducts())
+        productsViewModel.apply {
+            role = getRoles()[getRoles().indexOf(getRoles().firstOrNull {
+                it.id == getUser(getUserId()).role_id
+            })].role.toString()
+            if (role == "STAFF") {
+                binding.add.visibility = View.VISIBLE
+            }
+            addProductAdapter()
+            productAdapter.setProductList(getProducts())
+        }
+    }
+
+    private fun onAddButtonClick(view: View) {
+
+    }
+
+    override fun onRemoveClick(product: Product) {
+        productsViewModel.deleteProduct(product.id)
+    }
+
+    override fun onProductClick(product: Product, price: Float, count: Long) {
+        productsViewModel.apply {
+            val shopCart = ShopCart(
+                id = getLastShopCart() + 1L,
+                user_id = getUserId(),
+                product_id = product.id,
+                price = price,
+                count = count,
+            )
+            upsertShopCart(shopCart = shopCart)
+            Toast.makeText(
+                view?.context, resources.getString(
+                    R.string.order_add,
+                    product.name,
+                    count,
+                    price
+                ), Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }

@@ -3,11 +3,18 @@ package com.test.luxcarservice.app.di
 import com.test.luxcarservice.domain.data.repository.UserRepository
 import com.test.luxcarservice.domain.use_case.CheckUserEmailAndPasswordUseCase
 import com.test.luxcarservice.domain.use_case.CheckUserEmailUseCase
+import com.test.luxcarservice.domain.use_case.DeleteProductByIdFromDbUseCase
+import com.test.luxcarservice.domain.use_case.DeleteServiceByIdFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetAppointmentsByUserIdFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetAppointmentsFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetLastAppointmentFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetLastShopCartFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastUserFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetNotificationsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetProductsFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetRolesFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetServicesFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetShopCartsByUserIdFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetShopCartsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetUserFromDbByEmailUseCase
 import com.test.luxcarservice.domain.use_case.GetUserFromDbByIdUseCase
@@ -31,14 +38,40 @@ class DomainModule {
     fun provideCheckUserEmailAndPasswordUseCase(userRepository: UserRepository): CheckUserEmailAndPasswordUseCase {
         return CheckUserEmailAndPasswordUseCase(userRepository = userRepository)
     }
+
     @Provides
     fun provideCheckUserEmailUseCase(userRepository: UserRepository): CheckUserEmailUseCase {
         return CheckUserEmailUseCase(userRepository = userRepository)
     }
 
     @Provides
+    fun provideDeleteProductByIdFromDbUseCase(userRepository: UserRepository): DeleteProductByIdFromDbUseCase {
+        return DeleteProductByIdFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    fun provideDeleteServiceByIdFromDbUseCase(userRepository: UserRepository): DeleteServiceByIdFromDbUseCase {
+        return DeleteServiceByIdFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    fun provideGetAppointmentsByUserIdFromDbUseCase(userRepository: UserRepository): GetAppointmentsByUserIdFromDbUseCase {
+        return GetAppointmentsByUserIdFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
     fun provideGetAppointmentsFromDbUseCase(userRepository: UserRepository): GetAppointmentsFromDbUseCase {
         return GetAppointmentsFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    fun provideGetLastAppointmentFromDbUseCase(userRepository: UserRepository): GetLastAppointmentFromDbUseCase {
+        return GetLastAppointmentFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    fun provideGetLastShopCartFromDbUseCase(userRepository: UserRepository): GetLastShopCartFromDbUseCase {
+        return GetLastShopCartFromDbUseCase(userRepository = userRepository)
     }
 
     @Provides
@@ -52,6 +85,11 @@ class DomainModule {
     }
 
     @Provides
+    fun provideGetRolesFromDbUseCase(userRepository: UserRepository): GetRolesFromDbUseCase {
+        return GetRolesFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
     fun provideGetProductsFromDbUseCase(userRepository: UserRepository): GetProductsFromDbUseCase {
         return GetProductsFromDbUseCase(userRepository = userRepository)
     }
@@ -59,6 +97,11 @@ class DomainModule {
     @Provides
     fun provideGetServicesFromDbUseCase(userRepository: UserRepository): GetServicesFromDbUseCase {
         return GetServicesFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    fun provideGetShopCartsByUserIdFromDbUseCase(userRepository: UserRepository): GetShopCartsByUserIdFromDbUseCase {
+        return GetShopCartsByUserIdFromDbUseCase(userRepository = userRepository)
     }
 
     @Provides

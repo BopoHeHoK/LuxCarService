@@ -23,9 +23,14 @@ interface LuxCarServiceDao {
     @Query("SELECT * FROM appointments WHERE id = :appointmentId")
     fun getAppointmentEntity(appointmentId: Long): AppointmentEntity
 
+    @Query("SELECT * FROM appointments ORDER BY id DESC LIMIT 1")
+    fun getLastAppointmentEntity(): AppointmentEntity
 
     @Query("SELECT * FROM appointments")
     fun getAllAppointmentEntity(): List<AppointmentEntity>
+
+    @Query("SELECT * FROM appointments WHERE user_id = :userId")
+    fun getAppointmentByUserIdEntity(userId: Long): List<AppointmentEntity>
 
     //APPOINTMENT//
 
@@ -47,6 +52,12 @@ interface LuxCarServiceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertProductEntity(productEntity: ProductEntity)
 
+    @Query("DELETE FROM products WHERE id = :productId")
+    suspend fun deleteProductById(productId: Long)
+
+    @Query("DELETE FROM shop_carts WHERE product_id = :productId")
+    suspend fun deleteShopCartByProductId(productId: Long)
+
     @Query("SELECT * FROM products WHERE id = :productId")
     fun getProductEntity(productId: Long): ProductEntity
 
@@ -60,12 +71,21 @@ interface LuxCarServiceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertRole(roleEntity: RoleEntity)
 
+    @Query("SELECT * FROM roles")
+    fun getAllRoleEntity(): List<RoleEntity>
+
     //ROLE//
 
     //SERVICE//
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertServiceEntity(serviceEntity: ServiceEntity)
+
+    @Query("DELETE FROM services WHERE id = :serviceId")
+    suspend fun deleteServiceById(serviceId: Long)
+
+    @Query("DELETE FROM appointments WHERE service_id = :serviceId")
+    suspend fun deleteAppointmentByServiceId(serviceId: Long)
 
     @Query("SELECT * FROM services WHERE id = :serviceId")
     fun getServiceEntity(serviceId: Long): ServiceEntity
@@ -83,8 +103,14 @@ interface LuxCarServiceDao {
     @Query("SELECT * FROM shop_carts WHERE id = :shopCartId")
     fun getShopCartEntity(shopCartId: Long): ShopCartEntity
 
+    @Query("SELECT * FROM shop_carts ORDER BY id DESC LIMIT 1")
+    fun getLastShopCartEntity(): ShopCartEntity
+
     @Query("SELECT * FROM shop_carts")
     fun getAllShopCartEntity(): List<ShopCartEntity>
+
+    @Query("SELECT * FROM shop_carts WHERE user_id = :userId")
+    fun getShopCartByUserIdEntity(userId: Long): List<ShopCartEntity>
 
     //SHOP_CART//
 

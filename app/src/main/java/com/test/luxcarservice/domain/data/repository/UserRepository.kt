@@ -18,6 +18,14 @@ interface UserRepository {
 
     fun checkUserEmailAndPassword(email: String, password: String): Boolean
 
+    suspend fun deleteProductByIdFromDbUseCase(productId: Long)
+
+    suspend fun deleteServiceByIdFromDbUseCase(serviceId: Long)
+
+    fun getLastAppointmentFromDb(): Appointment
+
+    fun getLastShopCartFromDb(): ShopCart
+
     fun getLastUserFromDb(): User
 
     fun getUserFromDb(userId: Long): User
@@ -26,11 +34,17 @@ interface UserRepository {
 
     fun getUsersFromDb(): List<User>
 
+    fun getRolesFromDb(): List<Role>
+
     fun getAppointmentsFromDb(): List<Appointment>
+
+    fun getAppointmentsByUserIdFromDb(userId: Long): List<Appointment>
 
     fun getNotificationsFromDb(): List<Notification>
 
     fun getShopCartsFromDb(): List<ShopCart>
+
+    fun getShopCartsByUserIdFromDb(userId: Long): List<ShopCart>
 
     fun getProductsFromDb(): List<Product>
 

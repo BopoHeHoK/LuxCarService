@@ -57,7 +57,20 @@ class OrdersFragment : Fragment() {
 
     private fun observeOrders() {
         addOrderAdapter()
-        orderAdapter.setOrderList(ordersViewModel.getOrders())
+        orderAdapter.apply {
+            ordersViewModel.apply {
+                if (getRoles()[getRoles().indexOf(getRoles().firstOrNull {
+                        it.id == getUser(getUserId()).role_id
+                    })].role == "STAFF") {
+                    setOrderList(getOrders())
+                } else {
+                    setOrderList(getUserOrders(getUserId()))
+                }
+                setOrderList(getOrders())
+                setProductList(getProducts())
+                setUserList(getUsers())
+            }
+        }
     }
 
     private fun onArrowBackClick(view: View) {

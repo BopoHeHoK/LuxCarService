@@ -23,6 +23,8 @@ interface ConverterEM {
     fun toProduct(productEntity: ProductEntity): Product
     fun toProductList(productEntityList: List<ProductEntity>): List<Product>
     fun toRole(roleEntity: RoleEntity): Role
+
+    fun toRoleList(roleEntityList: List<RoleEntity>): List<Role>
     fun toService(serviceEntity: ServiceEntity): Service
     fun toServiceList(serviceEntityList: List<ServiceEntity>): List<Service>
     fun toShopCart(shopCartEntity: ShopCartEntity): ShopCart
@@ -108,6 +110,18 @@ class ConverterEMImpl : ConverterEM {
         )
     }
 
+    override fun toRoleList(roleEntityList: List<RoleEntity>): List<Role> {
+        val result = ArrayList<Role>()
+        roleEntityList.forEach {
+            val converted = Role(
+                id = it.id,
+                role = it.role,
+            )
+            result.add(converted)
+        }
+        return result
+    }
+
     override fun toService(serviceEntity: ServiceEntity): Service {
         return Service(
             id = serviceEntity.id,
@@ -136,6 +150,7 @@ class ConverterEMImpl : ConverterEM {
             id = shopCartEntity.id,
             user_id = shopCartEntity.user_id,
             product_id = shopCartEntity.product_id,
+            price = shopCartEntity.price,
             count = shopCartEntity.count,
         )
     }
@@ -147,6 +162,7 @@ class ConverterEMImpl : ConverterEM {
                 id = it.id,
                 user_id = it.user_id,
                 product_id = it.product_id,
+                price = it.price,
                 count = it.count,
             )
             result.add(converted)

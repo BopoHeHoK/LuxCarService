@@ -57,7 +57,20 @@ class AppointmentsFragment : Fragment() {
 
     private fun observeAppointments() {
         addAppointmentAdapter()
-        appointmentAdapter.setAppointmentList(appointmentsViewModel.getAppointments())
+        appointmentAdapter.apply {
+            appointmentsViewModel.apply {
+                if (getRoles()[getRoles().indexOf(getRoles().firstOrNull {
+                        it.id == getUser(getUserId()).role_id
+                    })].role == "STAFF") {
+                    setAppointmentList(getAppointments())
+                } else {
+                    setAppointmentList(getUserAppointments(getUserId()))
+                }
+                setAppointmentList(getAppointments())
+                setServiceList(getServices())
+                setUserList(getUsers())
+            }
+        }
     }
 
     private fun onArrowBackClick(view: View) {

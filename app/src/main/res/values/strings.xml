@@ -3,6 +3,7 @@
     <string name="version_number">v1.0.0</string>
     <string name="app_name">LuxCarService</string>
     <string name="save">Сохранить</string>
+    <string name="add">Добавить</string>
     <!-- Основное -->
 
     <!-- Вход -->
@@ -36,12 +37,14 @@
     <string name="services">Услуги</string>
     <string name="service">Услуга</string>
     <string name="service_description">Описание услуги</string>
+    <string name="appointment_add">Вы записаны на "%s" %s на %s</string>
     <!-- Услуги -->
 
     <!-- Автотовары -->
     <string name="products">Автотовары</string>
     <string name="product">Автотовар</string>
     <string name="product_description">Описание автотовара</string>
+    <string name="order_add">Заказ "%s" %x шт. %.2f руб. создан</string>
     <!-- Автотовары -->
 
     <!-- Записи -->
@@ -86,6 +89,14 @@
     <string name="_19_00">19:00</string>
     <string name="_2023_05_05">2023–05–05</string>
     <string name="_2023_06_05">2023–06–05</string>
+
+
+    <string name="h0m">%d:0%d</string>
+    <string name="hm">%d:%d</string>
+    <string name="_0d_0m_yyyy">0%d.0%d.%d</string>
+    <string name="_dd_0m_yyyy">%d.0%d.%d</string>
+    <string name="_0d_mm_yyyy">0%d.%d.%d</string>
+    <string name="dd_mm_yyyy">%d.%d.%d</string>
     <!-- Цифровые значения -->
 
     <!-- Ошибки-->

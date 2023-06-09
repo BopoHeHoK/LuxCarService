@@ -74,6 +74,7 @@ class ConverterMEImpl : ConverterME {
             id = shopCart.id,
             user_id = shopCart.user_id,
             product_id = shopCart.product_id,
+            price = shopCart.price,
             count = shopCart.count,
         )
     }

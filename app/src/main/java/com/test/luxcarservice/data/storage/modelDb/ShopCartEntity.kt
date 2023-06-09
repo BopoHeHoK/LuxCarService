@@ -27,5 +27,6 @@ data class ShopCartEntity(
     val user_id: Long,
     @ColumnInfo(name = "product_id")
     val product_id: Long,
+    val price: Float?,
     val count: Long?,
 )

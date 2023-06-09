@@ -13,7 +13,7 @@ import com.test.luxcarservice.data.storage.modelDb.ShopCartEntity
 import com.test.luxcarservice.data.storage.modelDb.UserEntity
 
 @Database(
-    version = 3,
+    version = 5,
     entities = [
         AppointmentEntity::class,
         NotificationEntity::class,
