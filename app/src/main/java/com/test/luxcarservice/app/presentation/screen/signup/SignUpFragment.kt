@@ -129,7 +129,7 @@ class SignUpFragment : Fragment() {
                     role = 2L
                 }
                 val user = User(
-                    id = getLastUser() + 1L,
+                    id = getLastUserId() + 1L,
                     email = etEmail.text.toString(),
                     password = etPassword.text.toString(),
                     phone_number = null,

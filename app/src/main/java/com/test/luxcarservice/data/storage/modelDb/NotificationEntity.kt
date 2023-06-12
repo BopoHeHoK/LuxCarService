@@ -12,6 +12,16 @@ import androidx.room.PrimaryKey
             entity = UserEntity::class,
             parentColumns = ["id"],
             childColumns = ["user_id"]
+        ),
+        ForeignKey(
+            entity = AppointmentEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["appointment_id"]
+        ),
+        ForeignKey(
+            entity = ShopCartEntity::class,
+            parentColumns = ["id"],
+            childColumns = ["shop_card_id"]
         )
     ]
 )
@@ -20,5 +30,8 @@ data class NotificationEntity(
     val id: Long,
     @ColumnInfo(name = "user_id")
     val user_id: Long,
-    val notification: String?,
+    @ColumnInfo(name = "appointment_id")
+    val appointment_id: Long?,
+    @ColumnInfo(name = "shop_card_id")
+    val shopCard_id: Long?,
 )

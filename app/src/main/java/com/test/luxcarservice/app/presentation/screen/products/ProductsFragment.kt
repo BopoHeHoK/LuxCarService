@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.test.luxcarservice.R
 import com.test.luxcarservice.app.app.App
 import com.test.luxcarservice.app.presentation.adapter.ProductAdapter
 import com.test.luxcarservice.databinding.FragmentProductsBinding
+import com.test.luxcarservice.domain.model.Notification
 import com.test.luxcarservice.domain.model.Product
 import com.test.luxcarservice.domain.model.ShopCart
 import javax.inject.Inject
@@ -50,6 +52,7 @@ class ProductsFragment : Fragment(), ProductAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         observeProducts()
         onAddButtonClick(view)
+        toAddService(view)
     }
 
     private fun addProductAdapter() {
@@ -83,14 +86,22 @@ class ProductsFragment : Fragment(), ProductAdapter.Listener {
 
     override fun onProductClick(product: Product, price: Float, count: Long) {
         productsViewModel.apply {
+            val lastShopCartId = getLastShopCartId()
             val shopCart = ShopCart(
-                id = getLastShopCart() + 1L,
+                id = getLastShopCartId() + 1L,
                 user_id = getUserId(),
                 product_id = product.id,
                 price = price,
                 count = count,
             )
             upsertShopCart(shopCart = shopCart)
+            val notification = Notification(
+                id = getLastNotificationId() + 1L,
+                user_id = getUserId(),
+                appointment_id = null,
+                shopCard_id = lastShopCartId + 1L
+            )
+            upsertNotification(notification = notification)
             Toast.makeText(
                 view?.context, resources.getString(
                     R.string.order_add,
@@ -99,6 +110,13 @@ class ProductsFragment : Fragment(), ProductAdapter.Listener {
                     price
                 ), Toast.LENGTH_LONG
             ).show()
+        }
+    }
+
+    private fun toAddService(view: View) {
+        binding.add.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_rootFragment_to_addProductFragment)
         }
     }
 }

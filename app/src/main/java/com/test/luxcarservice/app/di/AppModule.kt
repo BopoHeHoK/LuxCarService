@@ -1,6 +1,8 @@
 package com.test.luxcarservice.app.di
 
 import android.content.Context
+import com.test.luxcarservice.app.presentation.screen.add_product.AddProductViewModelFactory
+import com.test.luxcarservice.app.presentation.screen.add_service.AddServiceViewModelFactory
 import com.test.luxcarservice.app.presentation.screen.appointments.AppointmentsViewModelFactory
 import com.test.luxcarservice.app.presentation.screen.information.InformationViewModelFactory
 import com.test.luxcarservice.app.presentation.screen.notifications.NotificationsViewModelFactory
@@ -20,8 +22,10 @@ import com.test.luxcarservice.domain.use_case.DeleteServiceByIdFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetAppointmentsByUserIdFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetAppointmentsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastAppointmentFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetLastNotificationFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastShopCartFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastUserFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetNotificationsByUserIdFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetNotificationsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetProductsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetRolesFromDbUseCase
@@ -33,6 +37,7 @@ import com.test.luxcarservice.domain.use_case.GetUserFromDbByIdUseCase
 import com.test.luxcarservice.domain.use_case.GetUserIdFromSharedPrefsUseCase
 import com.test.luxcarservice.domain.use_case.GetUsersFromDbUseCase
 import com.test.luxcarservice.domain.use_case.SaveAppointmentToDbUseCase
+import com.test.luxcarservice.domain.use_case.SaveNotificationsToDbUseCase
 import com.test.luxcarservice.domain.use_case.SaveProductToDbUseCase
 import com.test.luxcarservice.domain.use_case.SaveRoleToDbUseCase
 import com.test.luxcarservice.domain.use_case.SaveServiceToDbUseCase
@@ -48,6 +53,24 @@ class AppModule(val context: Context) {
     @Provides
     fun provideContext(): Context {
         return context
+    }
+
+    @Provides
+    fun provideAddProductViewModelFactory(
+
+    ): AddProductViewModelFactory {
+        return AddProductViewModelFactory(
+
+        )
+    }
+
+    @Provides
+    fun provideAddServiceViewModelFactory(
+
+    ): AddServiceViewModelFactory {
+        return AddServiceViewModelFactory(
+
+        )
     }
 
     @Provides
@@ -83,9 +106,23 @@ class AppModule(val context: Context) {
     @Provides
     fun provideNotificationsViewModelFactory(
         getNotificationsFromDbUseCase: GetNotificationsFromDbUseCase,
+        getNotificationsByUserIdFromDbUseCase: GetNotificationsByUserIdFromDbUseCase,
+        getAppointmentsFromDbUseCase: GetAppointmentsFromDbUseCase,
+        getShopCartsFromDbUseCase: GetShopCartsFromDbUseCase,
+        getUsersFromDbUseCase: GetUsersFromDbUseCase,
+        getUserIdFromSharedPrefsUseCase: GetUserIdFromSharedPrefsUseCase,
+        getRolesFromDbUseCase: GetRolesFromDbUseCase,
+        getUserFromDbByIdUseCase: GetUserFromDbByIdUseCase,
     ): NotificationsViewModelFactory {
         return NotificationsViewModelFactory(
             getNotificationsFromDbUseCase = getNotificationsFromDbUseCase,
+            getNotificationsByUserIdFromDbUseCase = getNotificationsByUserIdFromDbUseCase,
+            getAppointmentsFromDbUseCase = getAppointmentsFromDbUseCase,
+            getShopCartsFromDbUseCase = getShopCartsFromDbUseCase,
+            getUsersFromDbUseCase = getUsersFromDbUseCase,
+            getUserIdFromSharedPrefsUseCase = getUserIdFromSharedPrefsUseCase,
+            getRolesFromDbUseCase = getRolesFromDbUseCase,
+            getUserFromDbByIdUseCase = getUserFromDbByIdUseCase,
         )
     }
 
@@ -117,8 +154,11 @@ class AppModule(val context: Context) {
         getRolesFromDbUseCase: GetRolesFromDbUseCase,
         getUserFromDbByIdUseCase: GetUserFromDbByIdUseCase,
         getShopCartsFromDbUseCase: GetShopCartsFromDbUseCase,
+        getNotificationsFromDbUseCase: GetNotificationsFromDbUseCase,
         getLastShopCartFromDbUseCase: GetLastShopCartFromDbUseCase,
+        getLastNotificationFromDbUseCase: GetLastNotificationFromDbUseCase,
         saveShopCartToDbUseCase: SaveShopCartToDbUseCase,
+        saveNotificationsToDbUseCase: SaveNotificationsToDbUseCase,
         deleteProductByIdFromDbUseCase: DeleteProductByIdFromDbUseCase,
     ): ProductsViewModelFactory {
         return ProductsViewModelFactory(
@@ -127,8 +167,11 @@ class AppModule(val context: Context) {
             getRolesFromDbUseCase = getRolesFromDbUseCase,
             getUserFromDbByIdUseCase = getUserFromDbByIdUseCase,
             getShopCartsFromDbUseCase = getShopCartsFromDbUseCase,
+            getNotificationsFromDbUseCase = getNotificationsFromDbUseCase,
             getLastShopCartFromDbUseCase = getLastShopCartFromDbUseCase,
+            getLastNotificationFromDbUseCase = getLastNotificationFromDbUseCase,
             saveShopCartToDbUseCase = saveShopCartToDbUseCase,
+            saveNotificationsToDbUseCase = saveNotificationsToDbUseCase,
             deleteProductByIdFromDbUseCase = deleteProductByIdFromDbUseCase,
         )
     }
@@ -175,8 +218,11 @@ class AppModule(val context: Context) {
         getRolesFromDbUseCase: GetRolesFromDbUseCase,
         getUserFromDbByIdUseCase: GetUserFromDbByIdUseCase,
         getAppointmentsFromDbUseCase: GetAppointmentsFromDbUseCase,
+        getNotificationsFromDbUseCase: GetNotificationsFromDbUseCase,
         getLastAppointmentFromDbUseCase: GetLastAppointmentFromDbUseCase,
+        getLastNotificationFromDbUseCase: GetLastNotificationFromDbUseCase,
         saveAppointmentToDbUseCase: SaveAppointmentToDbUseCase,
+        saveNotificationsToDbUseCase: SaveNotificationsToDbUseCase,
         deleteServiceByIdFromDbUseCase: DeleteServiceByIdFromDbUseCase,
     ): ServicesViewModelFactory {
         return ServicesViewModelFactory(
@@ -185,8 +231,11 @@ class AppModule(val context: Context) {
             getRolesFromDbUseCase = getRolesFromDbUseCase,
             getUserFromDbByIdUseCase = getUserFromDbByIdUseCase,
             getAppointmentsFromDbUseCase = getAppointmentsFromDbUseCase,
+            getNotificationsFromDbUseCase = getNotificationsFromDbUseCase,
             getLastAppointmentFromDbUseCase = getLastAppointmentFromDbUseCase,
+            getLastNotificationFromDbUseCase = getLastNotificationFromDbUseCase,
             saveAppointmentToDbUseCase = saveAppointmentToDbUseCase,
+            saveNotificationsToDbUseCase = saveNotificationsToDbUseCase,
             deleteServiceByIdFromDbUseCase = deleteServiceByIdFromDbUseCase,
         )
     }

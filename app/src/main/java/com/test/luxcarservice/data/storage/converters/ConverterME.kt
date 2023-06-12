@@ -40,7 +40,8 @@ class ConverterMEImpl : ConverterME {
         return NotificationEntity(
             id = notification.id,
             user_id = notification.user_id,
-            notification = notification.notification,
+            appointment_id = notification.appointment_id,
+            shopCard_id = notification.shopCard_id,
         )
     }
 

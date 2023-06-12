@@ -18,11 +18,11 @@ class SignUpViewModel(
     private val saveUserToDbUseCase: SaveUserToDbUseCase,
 ) : ViewModel() {
 
-    fun getLastUser(): Long {
-        if (getUsersFromDbUseCase.execute().isNotEmpty()) {
-            return getLastUserFromDbUseCase.execute().id
+    fun getLastUserId(): Long {
+        return if (getUsersFromDbUseCase.execute().isNotEmpty()) {
+            getLastUserFromDbUseCase.execute().id
         } else {
-            return 0L
+            0L
         }
     }
 

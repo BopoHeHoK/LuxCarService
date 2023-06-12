@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.afollestad.date.dayOfMonth
 import com.afollestad.date.month
@@ -18,6 +19,7 @@ import com.test.luxcarservice.app.app.App
 import com.test.luxcarservice.app.presentation.adapter.ServiceAdapter
 import com.test.luxcarservice.databinding.FragmentServicesBinding
 import com.test.luxcarservice.domain.model.Appointment
+import com.test.luxcarservice.domain.model.Notification
 import com.test.luxcarservice.domain.model.Service
 import java.util.Calendar
 import javax.inject.Inject
@@ -59,6 +61,7 @@ class ServicesFragment : Fragment(), ServiceAdapter.Listener {
         super.onViewCreated(view, savedInstanceState)
         observeServices()
         onAddButtonClick(view)
+        toAddService(view)
     }
 
     private fun addServiceAdapter() {
@@ -137,14 +140,22 @@ class ServicesFragment : Fragment(), ServiceAdapter.Listener {
                             )
                     }
                     positiveButton { dialog ->
+                        val lastAppointmentId = getLastAppointmentId()
                         val appointment = Appointment(
-                            id = getLastAppointment() + 1L,
+                            id = lastAppointmentId + 1L,
                             user_id = getUserId(),
                             service_id = service.id,
                             date = date,
                             time = time,
                         )
                         upsertAppointment(appointment = appointment)
+                        val notification = Notification(
+                            id = getLastNotificationId() + 1L,
+                            user_id = getUserId(),
+                            appointment_id = lastAppointmentId + 1L,
+                            shopCard_id = null
+                        )
+                        upsertNotification(notification = notification)
                         Toast.makeText(
                             view.context, resources.getString(
                             R.string.appointment_add,
@@ -157,6 +168,13 @@ class ServicesFragment : Fragment(), ServiceAdapter.Listener {
             }
             date = ""
             time = ""
+        }
+    }
+
+    private fun toAddService(view: View) {
+        binding.add.setOnClickListener {
+            Navigation.findNavController(view)
+                .navigate(R.id.action_rootFragment_to_addServiceFragment)
         }
     }
 }

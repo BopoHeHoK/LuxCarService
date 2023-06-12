@@ -8,8 +8,10 @@ import com.test.luxcarservice.domain.use_case.DeleteServiceByIdFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetAppointmentsByUserIdFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetAppointmentsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastAppointmentFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetLastNotificationFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastShopCartFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastUserFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetNotificationsByUserIdFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetNotificationsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetProductsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetRolesFromDbUseCase
@@ -70,6 +72,11 @@ class DomainModule {
     }
 
     @Provides
+    fun provideGetLastNotificationFromDbUseCase(userRepository: UserRepository): GetLastNotificationFromDbUseCase {
+        return GetLastNotificationFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
     fun provideGetLastShopCartFromDbUseCase(userRepository: UserRepository): GetLastShopCartFromDbUseCase {
         return GetLastShopCartFromDbUseCase(userRepository = userRepository)
     }
@@ -77,6 +84,11 @@ class DomainModule {
     @Provides
     fun provideGetLastUserFromDbUseCase(userRepository: UserRepository): GetLastUserFromDbUseCase {
         return GetLastUserFromDbUseCase(userRepository = userRepository)
+    }
+
+    @Provides
+    fun provideGetNotificationsByUserIdFromDbUseCase(userRepository: UserRepository): GetNotificationsByUserIdFromDbUseCase {
+        return GetNotificationsByUserIdFromDbUseCase(userRepository = userRepository)
     }
 
     @Provides

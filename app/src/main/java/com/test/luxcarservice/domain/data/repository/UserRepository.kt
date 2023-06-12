@@ -24,6 +24,8 @@ interface UserRepository {
 
     fun getLastAppointmentFromDb(): Appointment
 
+    fun getLastNotificationFromDb(): Notification
+
     fun getLastShopCartFromDb(): ShopCart
 
     fun getLastUserFromDb(): User
@@ -41,6 +43,8 @@ interface UserRepository {
     fun getAppointmentsByUserIdFromDb(userId: Long): List<Appointment>
 
     fun getNotificationsFromDb(): List<Notification>
+
+    fun getNotificationsByUserIdFromDb(userId: Long): List<Notification>
 
     fun getShopCartsFromDb(): List<ShopCart>
 

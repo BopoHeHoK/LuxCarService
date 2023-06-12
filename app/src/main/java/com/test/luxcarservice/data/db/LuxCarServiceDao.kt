@@ -18,51 +18,57 @@ interface LuxCarServiceDao {
     //APPOINTMENT//
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertAppointmentEntity(appointmentEntity: AppointmentEntity)
+    suspend fun upsertAppointment(appointmentEntity: AppointmentEntity)
+
+    @Query("DELETE FROM appointments WHERE service_id = :serviceId")
+    suspend fun deleteAppointmentsByServiceId(serviceId: Long)
 
     @Query("SELECT * FROM appointments WHERE id = :appointmentId")
-    fun getAppointmentEntity(appointmentId: Long): AppointmentEntity
+    fun getAppointment(appointmentId: Long): AppointmentEntity
 
     @Query("SELECT * FROM appointments ORDER BY id DESC LIMIT 1")
-    fun getLastAppointmentEntity(): AppointmentEntity
+    fun getLastAppointment(): AppointmentEntity
 
     @Query("SELECT * FROM appointments")
-    fun getAllAppointmentEntity(): List<AppointmentEntity>
+    fun getAllAppointments(): List<AppointmentEntity>
 
     @Query("SELECT * FROM appointments WHERE user_id = :userId")
-    fun getAppointmentByUserIdEntity(userId: Long): List<AppointmentEntity>
+    fun getAppointmentsByUserId(userId: Long): List<AppointmentEntity>
 
     //APPOINTMENT//
 
     //NOTIFICATION//
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertNotificationEntity(notificationEntity: NotificationEntity)
+    suspend fun upsertNotification(notificationEntity: NotificationEntity)
+
+    @Query("SELECT * FROM notifications ORDER BY id DESC LIMIT 1")
+    fun getLastNotification(): NotificationEntity
 
     @Query("SELECT * FROM notifications WHERE id = :notificationId")
-    fun getNotificationEntity(notificationId: Long): NotificationEntity
+    fun getNotification(notificationId: Long): NotificationEntity
 
     @Query("SELECT * FROM notifications")
-    fun getAllNotificationEntity(): List<NotificationEntity>
+    fun getAllNotifications(): List<NotificationEntity>
+
+    @Query("SELECT * FROM notifications WHERE user_id = :userId")
+    fun getNotificationsByUserId(userId: Long): List<NotificationEntity>
 
     //NOTIFICATION//
 
     //PRODUCT//
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertProductEntity(productEntity: ProductEntity)
+    suspend fun upsertProduct(productEntity: ProductEntity)
 
     @Query("DELETE FROM products WHERE id = :productId")
     suspend fun deleteProductById(productId: Long)
 
-    @Query("DELETE FROM shop_carts WHERE product_id = :productId")
-    suspend fun deleteShopCartByProductId(productId: Long)
-
     @Query("SELECT * FROM products WHERE id = :productId")
-    fun getProductEntity(productId: Long): ProductEntity
+    fun getProduct(productId: Long): ProductEntity
 
     @Query("SELECT * FROM products")
-    fun getAllProductEntity(): List<ProductEntity>
+    fun getAllProducts(): List<ProductEntity>
 
     //PRODUCT//
 
@@ -72,67 +78,67 @@ interface LuxCarServiceDao {
     suspend fun upsertRole(roleEntity: RoleEntity)
 
     @Query("SELECT * FROM roles")
-    fun getAllRoleEntity(): List<RoleEntity>
+    fun getAllRoles(): List<RoleEntity>
 
     //ROLE//
 
     //SERVICE//
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertServiceEntity(serviceEntity: ServiceEntity)
+    suspend fun upsertService(serviceEntity: ServiceEntity)
 
     @Query("DELETE FROM services WHERE id = :serviceId")
     suspend fun deleteServiceById(serviceId: Long)
 
-    @Query("DELETE FROM appointments WHERE service_id = :serviceId")
-    suspend fun deleteAppointmentByServiceId(serviceId: Long)
-
     @Query("SELECT * FROM services WHERE id = :serviceId")
-    fun getServiceEntity(serviceId: Long): ServiceEntity
+    fun getService(serviceId: Long): ServiceEntity
 
     @Query("SELECT * FROM services")
-    fun getAllServiceEntity(): List<ServiceEntity>
+    fun getAllServices(): List<ServiceEntity>
 
     //SERVICE//
 
     //SHOP_CART//
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertShopCartEntity(shopCartEntity: ShopCartEntity)
+    suspend fun upsertShopCart(shopCartEntity: ShopCartEntity)
+
+    @Query("DELETE FROM shop_carts WHERE product_id = :productId")
+    suspend fun deleteShopCartsByProductId(productId: Long)
 
     @Query("SELECT * FROM shop_carts WHERE id = :shopCartId")
-    fun getShopCartEntity(shopCartId: Long): ShopCartEntity
+    fun getShopCart(shopCartId: Long): ShopCartEntity
 
     @Query("SELECT * FROM shop_carts ORDER BY id DESC LIMIT 1")
-    fun getLastShopCartEntity(): ShopCartEntity
+    fun getLastShopCart(): ShopCartEntity
 
     @Query("SELECT * FROM shop_carts")
-    fun getAllShopCartEntity(): List<ShopCartEntity>
+    fun getAllShopCarts(): List<ShopCartEntity>
 
     @Query("SELECT * FROM shop_carts WHERE user_id = :userId")
-    fun getShopCartByUserIdEntity(userId: Long): List<ShopCartEntity>
+    fun getShopCartsByUserIdEntity(userId: Long): List<ShopCartEntity>
 
     //SHOP_CART//
 
     //USER//
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun upsertUserEntity(userEntity: UserEntity)
+    suspend fun upsertUser(userEntity: UserEntity)
 
     @Query("SELECT * FROM users WHERE id = :userId")
-    fun getUserEntity(userId: Long): UserEntity
+    fun getUser(userId: Long): UserEntity
 
     @Query("SELECT * FROM users ORDER BY id DESC LIMIT 1")
-    fun getLastUserEntity(): UserEntity
+    fun getLastUser(): UserEntity
 
     @Query("SELECT * FROM users WHERE email = :email")
-    fun getUserEntity(email: String): UserEntity
+    fun getUser(email: String): UserEntity
 
     @Query("SELECT * FROM users")
-    fun getAllUserEntity(): List<UserEntity>
+    fun getAllUsers(): List<UserEntity>
 
     @Query("SELECT * FROM users WHERE email = :email")
-    fun isEmailExists(email: String): UserEntity?
+    fun isEmailExist(email: String): UserEntity?
 
     @Query("SELECT * FROM users WHERE email = :email AND password = :password")
     fun isEmailAndPasswordCorrect(email: String, password: String): UserEntity?

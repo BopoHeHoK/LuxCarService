@@ -22,6 +22,8 @@ class NotificationsFragment : Fragment() {
     private lateinit var notificationsViewModel: NotificationsViewModel
     private lateinit var notificationAdapter: NotificationAdapter
 
+    private var userRole = ""
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity?.applicationContext as App).appComponent.injectNotificationsFragment(
@@ -48,7 +50,7 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun addNotificationAdapter() {
-        notificationAdapter = NotificationAdapter()
+        notificationAdapter = NotificationAdapter(userRole)
         binding.recyclerView.apply {
             layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = notificationAdapter
@@ -56,8 +58,22 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun observeNotifications() {
-        addNotificationAdapter()
-        notificationAdapter.setNotificationList(notificationsViewModel.getNotifications())
+        notificationAdapter.apply {
+            notificationsViewModel.apply {
+                addNotificationAdapter()
+                userRole = getRoles()[getRoles().indexOf(getRoles().firstOrNull {
+                    it.id == getUser(getUserId()).role_id
+                })].role.toString()
+                if (userRole == "STAFF") {
+                    setNotificationList(getNotifications())
+                } else {
+                    setNotificationList(getNotificationsByUserId(userId = getUserId()))
+                }
+                setAppointmentList(getAppointments())
+                setOrderList(getOrders())
+                setUserList(getUsers())
+            }
+        }
     }
 
     private fun onArrowBackClick(view: View) {

@@ -1,5 +1,7 @@
 package com.test.luxcarservice.app.di
 
+import com.test.luxcarservice.app.presentation.screen.add_product.AddProductFragment
+import com.test.luxcarservice.app.presentation.screen.add_service.AddServiceFragment
 import com.test.luxcarservice.app.presentation.screen.appointments.AppointmentsFragment
 import com.test.luxcarservice.app.presentation.screen.information.InformationFragment
 import com.test.luxcarservice.app.presentation.screen.notifications.NotificationsFragment
@@ -16,6 +18,10 @@ import dagger.Component
 
 @Component(modules = [AppModule::class, DomainModule::class, DataModule::class])
 interface AppComponent {
+
+    fun injectAddProductFragment(addProductFragment: AddProductFragment)
+
+    fun injectAddServiceFragment(addServiceFragment: AddServiceFragment)
 
     fun injectAppointmentsFragment(appointmentsFragment: AppointmentsFragment)
 

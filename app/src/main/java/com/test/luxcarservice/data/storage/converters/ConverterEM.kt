@@ -63,7 +63,8 @@ class ConverterEMImpl : ConverterEM {
         return Notification(
             id = notificationEntity.id,
             user_id = notificationEntity.user_id,
-            notification = notificationEntity.notification,
+            appointment_id = notificationEntity.appointment_id,
+            shopCard_id = notificationEntity.shopCard_id,
         )
     }
 
@@ -73,7 +74,8 @@ class ConverterEMImpl : ConverterEM {
             val converted = Notification(
                 id = it.id,
                 user_id = it.user_id,
-                notification = it.notification,
+                appointment_id = it.appointment_id,
+                shopCard_id = it.shopCard_id,
             )
             result.add(converted)
         }

@@ -28,7 +28,7 @@ class UserRepositoryImpl(
     }
 
     override fun checkUserEmail(email: String): Boolean {
-        if (luxCarServiceDatabase.luxCarServiceDao().isEmailExists(email = email) != null) {
+        if (luxCarServiceDatabase.luxCarServiceDao().isEmailExist(email = email) != null) {
             return true
         }
         return false
@@ -44,90 +44,103 @@ class UserRepositoryImpl(
     }
 
     override suspend fun deleteProductByIdFromDbUseCase(productId: Long) {
-        luxCarServiceDatabase.luxCarServiceDao().deleteShopCartByProductId(productId = productId)
+        luxCarServiceDatabase.luxCarServiceDao().deleteShopCartsByProductId(productId = productId)
         luxCarServiceDatabase.luxCarServiceDao().deleteProductById(productId = productId)
     }
 
     override suspend fun deleteServiceByIdFromDbUseCase(serviceId: Long) {
-        luxCarServiceDatabase.luxCarServiceDao().deleteAppointmentByServiceId(serviceId = serviceId)
+        luxCarServiceDatabase.luxCarServiceDao()
+            .deleteAppointmentsByServiceId(serviceId = serviceId)
         luxCarServiceDatabase.luxCarServiceDao().deleteServiceById(serviceId = serviceId)
     }
 
     override fun getLastAppointmentFromDb(): Appointment {
         return converterEM.toAppointment(
-            luxCarServiceDatabase.luxCarServiceDao().getLastAppointmentEntity()
+            luxCarServiceDatabase.luxCarServiceDao().getLastAppointment()
+        )
+    }
+
+    override fun getLastNotificationFromDb(): Notification {
+        return converterEM.toNotification(
+            luxCarServiceDatabase.luxCarServiceDao().getLastNotification()
         )
     }
 
     override fun getLastShopCartFromDb(): ShopCart {
         return converterEM.toShopCart(
-            luxCarServiceDatabase.luxCarServiceDao().getLastShopCartEntity()
+            luxCarServiceDatabase.luxCarServiceDao().getLastShopCart()
         )
     }
 
     override fun getLastUserFromDb(): User {
-        return converterEM.toUser(luxCarServiceDatabase.luxCarServiceDao().getLastUserEntity())
+        return converterEM.toUser(luxCarServiceDatabase.luxCarServiceDao().getLastUser())
     }
 
     override fun getUserFromDb(userId: Long): User {
         return converterEM.toUser(
-            luxCarServiceDatabase.luxCarServiceDao().getUserEntity(userId = userId)
+            luxCarServiceDatabase.luxCarServiceDao().getUser(userId = userId)
         )
     }
 
     override fun getUserFromDb(email: String): User {
         return converterEM.toUser(
-            luxCarServiceDatabase.luxCarServiceDao().getUserEntity(email = email)
+            luxCarServiceDatabase.luxCarServiceDao().getUser(email = email)
         )
     }
 
     override fun getUsersFromDb(): List<User> {
-        return converterEM.toUserList(luxCarServiceDatabase.luxCarServiceDao().getAllUserEntity())
+        return converterEM.toUserList(luxCarServiceDatabase.luxCarServiceDao().getAllUsers())
     }
 
     override fun getRolesFromDb(): List<Role> {
-        return converterEM.toRoleList(luxCarServiceDatabase.luxCarServiceDao().getAllRoleEntity())
+        return converterEM.toRoleList(luxCarServiceDatabase.luxCarServiceDao().getAllRoles())
     }
 
     override fun getAppointmentsFromDb(): List<Appointment> {
         return converterEM.toAppointmentList(
-            luxCarServiceDatabase.luxCarServiceDao().getAllAppointmentEntity()
+            luxCarServiceDatabase.luxCarServiceDao().getAllAppointments()
         )
     }
 
     override fun getAppointmentsByUserIdFromDb(userId: Long): List<Appointment> {
         return converterEM.toAppointmentList(
-            luxCarServiceDatabase.luxCarServiceDao().getAppointmentByUserIdEntity(userId = userId)
+            luxCarServiceDatabase.luxCarServiceDao().getAppointmentsByUserId(userId = userId)
         )
     }
 
     override fun getNotificationsFromDb(): List<Notification> {
         return converterEM.toNotificationList(
-            luxCarServiceDatabase.luxCarServiceDao().getAllNotificationEntity()
+            luxCarServiceDatabase.luxCarServiceDao().getAllNotifications()
+        )
+    }
+
+    override fun getNotificationsByUserIdFromDb(userId: Long): List<Notification> {
+        return converterEM.toNotificationList(
+            luxCarServiceDatabase.luxCarServiceDao().getNotificationsByUserId(userId = userId)
         )
     }
 
     override fun getShopCartsFromDb(): List<ShopCart> {
         return converterEM.toShopCartList(
-            luxCarServiceDatabase.luxCarServiceDao().getAllShopCartEntity()
+            luxCarServiceDatabase.luxCarServiceDao().getAllShopCarts()
         )
     }
 
     override fun getShopCartsByUserIdFromDb(userId: Long): List<ShopCart> {
         return converterEM.toShopCartList(
-            luxCarServiceDatabase.luxCarServiceDao().getShopCartByUserIdEntity(userId = userId)
+            luxCarServiceDatabase.luxCarServiceDao().getShopCartsByUserIdEntity(userId = userId)
         )
     }
 
     override fun getProductsFromDb(): List<Product> {
         return converterEM.toProductList(
-            luxCarServiceDatabase.luxCarServiceDao().getAllProductEntity()
+            luxCarServiceDatabase.luxCarServiceDao().getAllProducts()
         )
     }
 
     override fun getServicesFromDb(): List<Service> {
         return converterEM.toServiceList(
-            luxCarServiceDatabase.luxCarServiceDao().getAllServiceEntity()
+            luxCarServiceDatabase.luxCarServiceDao().getAllServices()
         )
     }
 
@@ -137,31 +150,31 @@ class UserRepositoryImpl(
 
     override suspend fun saveUserToDb(user: User) {
         luxCarServiceDatabase.luxCarServiceDao()
-            .upsertUserEntity(converterME.toUserEntity(user = user))
+            .upsertUser(converterME.toUserEntity(user = user))
     }
 
     override suspend fun saveAppointment(appointment: Appointment) {
         luxCarServiceDatabase.luxCarServiceDao()
-            .upsertAppointmentEntity(converterME.toAppointmentEntity(appointment = appointment))
+            .upsertAppointment(converterME.toAppointmentEntity(appointment = appointment))
     }
 
     override suspend fun saveNotification(notification: Notification) {
         luxCarServiceDatabase.luxCarServiceDao()
-            .upsertNotificationEntity(converterME.toNotificationEntity(notification = notification))
+            .upsertNotification(converterME.toNotificationEntity(notification = notification))
     }
 
     override suspend fun saveShopCart(shopCart: ShopCart) {
         luxCarServiceDatabase.luxCarServiceDao()
-            .upsertShopCartEntity(converterME.toShopCartEntity(shopCart = shopCart))
+            .upsertShopCart(converterME.toShopCartEntity(shopCart = shopCart))
     }
 
     override suspend fun saveProduct(product: Product) {
         luxCarServiceDatabase.luxCarServiceDao()
-            .upsertProductEntity(converterME.toProductEntity(product = product))
+            .upsertProduct(converterME.toProductEntity(product = product))
     }
 
     override suspend fun saveService(service: Service) {
         luxCarServiceDatabase.luxCarServiceDao()
-            .upsertServiceEntity(converterME.toServiceEntity(service = service))
+            .upsertService(converterME.toServiceEntity(service = service))
     }
 }

@@ -36,6 +36,7 @@
     <!-- Услуги -->
     <string name="services">Услуги</string>
     <string name="service">Услуга</string>
+    <string name="add_service">Добавить услугу</string>
     <string name="service_description">Описание услуги</string>
     <string name="appointment_add">Вы записаны на "%s" %s на %s</string>
     <!-- Услуги -->
@@ -43,19 +44,23 @@
     <!-- Автотовары -->
     <string name="products">Автотовары</string>
     <string name="product">Автотовар</string>
+    <string name="add_product">Добавить автотовар</string>
     <string name="product_description">Описание автотовара</string>
     <string name="order_add">Заказ "%s" %x шт. %.2f руб. создан</string>
     <!-- Автотовары -->
 
     <!-- Записи -->
+    <string name="appointments">Записи</string>
     <string name="your_appointments">Ваши записи</string>
     <string name="subscribe">Записаться</string>
+    <string name="cancel_appointment">Отменить запись</string>
     <!-- Записи -->
 
     <!-- Заказы -->
     <string name="orders">Заказы</string>
     <string name="your_orders">Ваши заказы</string>
     <string name="order">Заказать</string>
+    <string name="cancel_order">Отменить заказ</string>
     <!-- Заказы -->
 
     <!-- Профиль -->
@@ -117,5 +122,7 @@
     <string name="mock_phone">+7 (831) 999-99-99</string>
     <string name="mock_email">luxcarservice@nn.ru</string>
     <string name="mock_description">На рынке автомобильных услуг уже 25 лет, с 1996 года. У нас возможно обслуживание до восьми автомобилей одновременно, всегда в наличии технологические жидкости и расходные материалы. Опыт сотрудников автосервиса составляет более 10 лет успешной работы.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- Ошибки-->
 </resources>
