@@ -66,7 +66,6 @@ class OrdersFragment : Fragment() {
                 } else {
                     setOrderList(getUserOrders(getUserId()))
                 }
-                setOrderList(getOrders())
                 setProductList(getProducts())
                 setUserList(getUsers())
             }

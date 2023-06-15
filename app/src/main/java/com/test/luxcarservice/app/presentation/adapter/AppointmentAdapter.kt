@@ -40,6 +40,10 @@ class AppointmentAdapter : RecyclerView.Adapter<AppointmentAdapter.AppointmentVi
             tvDate.text = appointmentList[position].date
             tvTime.text = appointmentList[position].time
 
+            tvPrice.text = serviceList[serviceList.indexOf(serviceList.firstOrNull {
+                it.id == appointmentList[position].service_id
+            })].price.toString()
+
             //имя
             tvName.text = userList[userList.indexOf(userList.firstOrNull {
                 it.id == appointmentList[position].user_id

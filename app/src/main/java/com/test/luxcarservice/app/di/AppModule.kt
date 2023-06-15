@@ -23,6 +23,8 @@ import com.test.luxcarservice.domain.use_case.GetAppointmentsByUserIdFromDbUseCa
 import com.test.luxcarservice.domain.use_case.GetAppointmentsFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastAppointmentFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastNotificationFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetLastProductFromDbUseCase
+import com.test.luxcarservice.domain.use_case.GetLastServiceFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastShopCartFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetLastUserFromDbUseCase
 import com.test.luxcarservice.domain.use_case.GetNotificationsByUserIdFromDbUseCase
@@ -57,19 +59,27 @@ class AppModule(val context: Context) {
 
     @Provides
     fun provideAddProductViewModelFactory(
-
+        getProductsFromDbUseCase: GetProductsFromDbUseCase,
+        getLastProductFromDbUseCase: GetLastProductFromDbUseCase,
+        saveProductToDbUseCase: SaveProductToDbUseCase,
     ): AddProductViewModelFactory {
         return AddProductViewModelFactory(
-
+            getProductsFromDbUseCase = getProductsFromDbUseCase,
+            getLastProductFromDbUseCase = getLastProductFromDbUseCase,
+            saveProductToDbUseCase = saveProductToDbUseCase,
         )
     }
 
     @Provides
     fun provideAddServiceViewModelFactory(
-
+        getServicesFromDbUseCase: GetServicesFromDbUseCase,
+        getLastServiceFromDbUseCase: GetLastServiceFromDbUseCase,
+        saveServiceToDbUseCase: SaveServiceToDbUseCase,
     ): AddServiceViewModelFactory {
         return AddServiceViewModelFactory(
-
+            getServicesFromDbUseCase = getServicesFromDbUseCase,
+            getLastServiceFromDbUseCase = getLastServiceFromDbUseCase,
+            saveServiceToDbUseCase = saveServiceToDbUseCase,
         )
     }
 
@@ -109,6 +119,8 @@ class AppModule(val context: Context) {
         getNotificationsByUserIdFromDbUseCase: GetNotificationsByUserIdFromDbUseCase,
         getAppointmentsFromDbUseCase: GetAppointmentsFromDbUseCase,
         getShopCartsFromDbUseCase: GetShopCartsFromDbUseCase,
+        getServicesFromDbUseCase: GetServicesFromDbUseCase,
+        getProductsFromDbUseCase: GetProductsFromDbUseCase,
         getUsersFromDbUseCase: GetUsersFromDbUseCase,
         getUserIdFromSharedPrefsUseCase: GetUserIdFromSharedPrefsUseCase,
         getRolesFromDbUseCase: GetRolesFromDbUseCase,
@@ -119,6 +131,8 @@ class AppModule(val context: Context) {
             getNotificationsByUserIdFromDbUseCase = getNotificationsByUserIdFromDbUseCase,
             getAppointmentsFromDbUseCase = getAppointmentsFromDbUseCase,
             getShopCartsFromDbUseCase = getShopCartsFromDbUseCase,
+            getServicesFromDbUseCase = getServicesFromDbUseCase,
+            getProductsFromDbUseCase = getProductsFromDbUseCase,
             getUsersFromDbUseCase = getUsersFromDbUseCase,
             getUserIdFromSharedPrefsUseCase = getUserIdFromSharedPrefsUseCase,
             getRolesFromDbUseCase = getRolesFromDbUseCase,

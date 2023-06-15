@@ -40,6 +40,10 @@ class ProductAdapter(
                         listener.onRemoveClick(productList[position])
                     }
                 }
+                btnOrder.visibility = View.GONE
+                imgMinus.visibility = View.GONE
+                tvCount.visibility = View.GONE
+                imgPlus.visibility = View.GONE
             }
 
             tvTitle.text = productList[position].name

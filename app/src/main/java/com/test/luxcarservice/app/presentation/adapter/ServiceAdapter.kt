@@ -35,10 +35,12 @@ class ServiceAdapter(
                         listener.onRemoveClick(serviceList[position])
                     }
                 }
+                btnSubscribe.visibility = View.GONE
             }
 
             tvTitle.text = serviceList[position].name
             tvDescription.text = serviceList[position].description
+            tvPrice.text = serviceList[position].price.toString()
             btnSubscribe.setOnClickListener {
                 listener.onServiceClick(serviceList[position])
             }

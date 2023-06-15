@@ -82,6 +82,15 @@
     <string name="notification">Уведомление</string>
     <!-- Уведомления -->
 
+    <!-- Добавление -->
+    <string name="et_price">Введите цену</string>
+    <string name="price">Цена</string>
+    <string name="et_decription">Введите описание</string>
+    <string name="decription">Описание</string>
+    <string name="et_name">Введиет название</string>
+    <string name="name">Название</string>
+    <!-- Добавление -->
+
     <!-- Цифровые значения -->
     <string name="_0">0</string>
     <string name="_1500">1500&#160;руб.</string>
@@ -94,8 +103,6 @@
     <string name="_19_00">19:00</string>
     <string name="_2023_05_05">2023–05–05</string>
     <string name="_2023_06_05">2023–06–05</string>
-
-
     <string name="h0m">%d:0%d</string>
     <string name="hm">%d:%d</string>
     <string name="_0d_0m_yyyy">0%d.0%d.%d</string>
@@ -114,15 +121,16 @@
     <string name="email_format_error">Email должен быть в формате mail@mail.mail</string>
     <string name="password_length_error">Пароль должен содержать не меньше 6 символов</string>
     <string name="repeat_password_error">Пароли не совпадают</string>
-    <string name="price">Цена</string>
-    <string name="Count">Количество</string>
+    <!-- Ошибки-->
+
+    <!-- Прочее-->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="сount">Количество</string>
     <string name="time">Время</string>
     <string name="date">Дата</string>
     <string name="mock_address">ул. Долгополова, 19, Нижний Новгород, 603002</string>
-    <string name="mock_phone">+7 (831) 999-99-99</string>
+    <string name="mock_phone">+7 (831) 999–99-99</string>
     <string name="mock_email">luxcarservice@nn.ru</string>
     <string name="mock_description">На рынке автомобильных услуг уже 25 лет, с 1996 года. У нас возможно обслуживание до восьми автомобилей одновременно, всегда в наличии технологические жидкости и расходные материалы. Опыт сотрудников автосервиса составляет более 10 лет успешной работы.</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- Ошибки-->
+    <!-- Прочее-->
 </resources>

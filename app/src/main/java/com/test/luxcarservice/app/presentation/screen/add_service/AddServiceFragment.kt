@@ -8,28 +8,27 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.test.luxcarservice.app.app.App
-import com.test.luxcarservice.app.presentation.screen.add_product.AddProductViewModel
-import com.test.luxcarservice.app.presentation.screen.add_product.AddProductViewModelFactory
 import com.test.luxcarservice.databinding.FragmentAddServiceBinding
+import com.test.luxcarservice.domain.model.Service
 import javax.inject.Inject
 
 class AddServiceFragment : Fragment() {
 
     @Inject
-    lateinit var addProductViewModelFactory: AddProductViewModelFactory
+    lateinit var addServiceViewModelFactory: AddServiceViewModelFactory
 
     private lateinit var binding: FragmentAddServiceBinding
-    private lateinit var addProductViewModel: AddProductViewModel
+    private lateinit var addServiceViewModel: AddServiceViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         (activity?.applicationContext as App).appComponent.injectAddServiceFragment(
             addServiceFragment = this
         )
-        addProductViewModel = ViewModelProvider(
+        addServiceViewModel = ViewModelProvider(
             owner = this,
-            factory = addProductViewModelFactory
-        )[AddProductViewModel::class.java]
+            factory = addServiceViewModelFactory
+        )[AddServiceViewModel::class.java]
     }
 
     override fun onCreateView(
@@ -42,7 +41,25 @@ class AddServiceFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onSaveButtonClick(view)
         onArrowBackClick(view)
+    }
+
+    private fun onSaveButtonClick(view: View) {
+        binding.apply {
+            save.setOnClickListener {
+                addServiceViewModel.apply {
+                    val service = Service(
+                        id = getLastServiceId() + 1L,
+                        name = etName.text.toString(),
+                        description = etDecription.text.toString(),
+                        price = etPrice.text.toString().toFloat(),
+                    )
+                    upsertService(service = service)
+                    Navigation.findNavController(view).popBackStack()
+                }
+            }
+        }
     }
 
     private fun onArrowBackClick(view: View) {

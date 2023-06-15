@@ -26,6 +26,10 @@ interface UserRepository {
 
     fun getLastNotificationFromDb(): Notification
 
+    fun getLastProductFromDb(): Product
+
+    fun getLastServiceFromDb(): Service
+
     fun getLastShopCartFromDb(): ShopCart
 
     fun getLastUserFromDb(): User

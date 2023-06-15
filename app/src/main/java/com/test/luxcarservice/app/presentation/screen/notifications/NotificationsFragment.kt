@@ -58,12 +58,12 @@ class NotificationsFragment : Fragment() {
     }
 
     private fun observeNotifications() {
-        notificationAdapter.apply {
-            notificationsViewModel.apply {
-                addNotificationAdapter()
-                userRole = getRoles()[getRoles().indexOf(getRoles().firstOrNull {
-                    it.id == getUser(getUserId()).role_id
-                })].role.toString()
+        notificationsViewModel.apply {
+            userRole = getRoles()[getRoles().indexOf(getRoles().firstOrNull {
+                it.id == getUser(getUserId()).role_id
+            })].role.toString()
+            addNotificationAdapter()
+            notificationAdapter.apply {
                 if (userRole == "STAFF") {
                     setNotificationList(getNotifications())
                 } else {
@@ -71,6 +71,8 @@ class NotificationsFragment : Fragment() {
                 }
                 setAppointmentList(getAppointments())
                 setOrderList(getOrders())
+                setServiceList(getServices())
+                setProductList(getProducts())
                 setUserList(getUsers())
             }
         }

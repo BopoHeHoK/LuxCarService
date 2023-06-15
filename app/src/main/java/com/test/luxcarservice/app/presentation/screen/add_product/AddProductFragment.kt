@@ -10,6 +10,7 @@ import androidx.navigation.Navigation
 import com.test.luxcarservice.R
 import com.test.luxcarservice.app.app.App
 import com.test.luxcarservice.databinding.FragmentAddProductBinding
+import com.test.luxcarservice.domain.model.Product
 import javax.inject.Inject
 
 class AddProductFragment : Fragment() {
@@ -41,7 +42,25 @@ class AddProductFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        onSaveButtonClick(view)
         onArrowBackClick(view)
+    }
+
+    private fun onSaveButtonClick(view: View) {
+        binding.apply {
+            save.setOnClickListener {
+                addProductViewModel.apply {
+                    val product = Product(
+                        id = getLastProductId() + 1L,
+                        name = etName.text.toString(),
+                        description = etDecription.text.toString(),
+                        price = etPrice.text.toString().toFloat(),
+                    )
+                    upsertProduct(product = product)
+                    Navigation.findNavController(view).popBackStack()
+                }
+            }
+        }
     }
 
     private fun onArrowBackClick(view: View) {

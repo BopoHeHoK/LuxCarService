@@ -66,6 +66,18 @@ class UserRepositoryImpl(
         )
     }
 
+    override fun getLastProductFromDb(): Product {
+        return converterEM.toProduct(
+            luxCarServiceDatabase.luxCarServiceDao().getLastProduct()
+        )
+    }
+
+    override fun getLastServiceFromDb(): Service {
+        return converterEM.toService(
+            luxCarServiceDatabase.luxCarServiceDao().getLastService()
+        )
+    }
+
     override fun getLastShopCartFromDb(): ShopCart {
         return converterEM.toShopCart(
             luxCarServiceDatabase.luxCarServiceDao().getLastShopCart()

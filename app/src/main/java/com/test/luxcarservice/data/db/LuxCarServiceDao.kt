@@ -61,6 +61,9 @@ interface LuxCarServiceDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertProduct(productEntity: ProductEntity)
 
+    @Query("SELECT * FROM products ORDER BY id DESC LIMIT 1")
+    fun getLastProduct(): ProductEntity
+
     @Query("DELETE FROM products WHERE id = :productId")
     suspend fun deleteProductById(productId: Long)
 
@@ -86,6 +89,9 @@ interface LuxCarServiceDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertService(serviceEntity: ServiceEntity)
+
+    @Query("SELECT * FROM services ORDER BY id DESC LIMIT 1")
+    fun getLastService(): ServiceEntity
 
     @Query("DELETE FROM services WHERE id = :serviceId")
     suspend fun deleteServiceById(serviceId: Long)
